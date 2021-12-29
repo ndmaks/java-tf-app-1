@@ -3,7 +3,7 @@
 pipeline {
     agent any
     tools {
-        maven 'maven'
+        maven 'my-maven'
         terraform 'tf'
     }
     environment {
