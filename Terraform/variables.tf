@@ -10,7 +10,6 @@ variable avail_zone {
 variable env_prefix {
     default = "dev"
 }
-
 variable instance_type {
     default = "t2.micro"
 }
