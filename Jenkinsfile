@@ -4,10 +4,10 @@ pipeline {
     agent any
     tools {
         maven 'my-maven'
-        terraform 'tf'
+        terraform 'terraform'
     }
     environment {
-        IMAGE_NAME = "eagle79/java-app:java-maven-${BUILD_NUMBER}"
+        IMAGE_NAME = "nedimaksu/java-app:java-maven-${BUILD_NUMBER}"
     }
     stages {
     
@@ -70,7 +70,7 @@ pipeline {
                    def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
 
             
-                    sshagent(['ssh-my-key']) {
+                    sshagent(['ssh-key']) {
     /*                  sh "scp -o StrictHostKeyChecking=no ./.env ec2-user@${EC2_PUBLIC_IP}:/home/ec2-user"  
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ec2-user@${EC2_PUBLIC_IP}:/home/ec2-user"
                         sh 'ssh -o StrictHostKeyChecking=no ec2-user@${EC2_PUBLIC_IP} ${shellCmd}' 
