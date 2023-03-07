@@ -54,10 +54,10 @@ pipeline {
                 }
             }
         }
-        stage('deploy') {
+        /* stage('deploy') {
             environment {
                 DOCKER_CREDS = credentials('docker-hub')
-            }
+            } */
 
             steps {
                 /* script {
@@ -68,10 +68,10 @@ pipeline {
                    /* def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME}"
                    sh "echo 'IMAGE=${IMAGE_NAME}' > .env" */
                    def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME} ${DOCKER_CREDS_USR} ${DOCKER_CREDS_PSW}"
-                   def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
+                   def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}" */
 
             
-                    sshagent(['ssh-key']) {
+                    /* sshagent(['ssh-key']) {
                       sh "scp -o StrictHostKeyChecking=no ./.env ec2-user@${EC2_PUBLIC_IP}:/home/ec2-user"  
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ec2-user@${EC2_PUBLIC_IP}:/home/ec2-user"
                         sh 'ssh -o StrictHostKeyChecking=no ec2-user@${EC2_PUBLIC_IP} ${shellCmd}' 
@@ -80,7 +80,7 @@ pipeline {
      
                         sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2Instance}:/home/ec2-user"
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2Instance}:/home/ec2-user"
-                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}" */
+                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"  */
 
 
                     }
