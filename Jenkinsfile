@@ -54,13 +54,13 @@ pipeline {
                 }
             }
         }
-        /* stage('deploy') {
+        stage('deploy') {
             environment {
                 DOCKER_CREDS = credentials('docker-hub')
             }
 
             steps {
-                script {
+                /* script {
                    echo "waiting for EC2 server to initialize" 
                    sleep(time: 90, unit: "SECONDS") 
                    echo 'deploying docker image to EC2...'
@@ -80,7 +80,7 @@ pipeline {
      
                         sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2Instance}:/home/ec2-user"
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2Instance}:/home/ec2-user"
-                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}" */
 
 
                     }
@@ -88,5 +88,5 @@ pipeline {
                 }
             }
         } 
-    } */
+    } 
 }
