@@ -45,15 +45,16 @@ pipeline {
                 script {
                     dir('Terraform') {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',credentialsId: "AWS-ID",accessKeyVariable: 'AWS_ACCESS_KEY_ID',secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                            sh "terraform init"
+                           sh "terraform destroy"
+                            /* sh "terraform init"
                             sh "terraform apply --auto-approve"
-                            EC2_PUBLIC_IP = sh(script: "terraform output ec2_public_ip",returnStdout: true).trim()
+                            EC2_PUBLIC_IP = sh(script: "terraform output ec2_public_ip",returnStdout: true).trim() */
                         }
                     }
                 }
             }
         }
-        stage('deploy') {
+        /* stage('deploy') {
             environment {
                 DOCKER_CREDS = credentials('docker-hub')
             }
@@ -71,12 +72,12 @@ pipeline {
 
             
                     sshagent(['ssh-key']) {
-    /*                  sh "scp -o StrictHostKeyChecking=no ./.env ec2-user@${EC2_PUBLIC_IP}:/home/ec2-user"  
+                      sh "scp -o StrictHostKeyChecking=no ./.env ec2-user@${EC2_PUBLIC_IP}:/home/ec2-user"  
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ec2-user@${EC2_PUBLIC_IP}:/home/ec2-user"
                         sh 'ssh -o StrictHostKeyChecking=no ec2-user@${EC2_PUBLIC_IP} ${shellCmd}' 
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${EC2_PUBLIC_IP} echo $PASS | docker login -u $USER --password-stdin && docker-compose -f docker-compose.yaml up --detach"
                         
-    */ 
+     
                         sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2Instance}:/home/ec2-user"
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2Instance}:/home/ec2-user"
                         sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
@@ -86,6 +87,6 @@ pipeline {
                    
                 }
             }
-        }
+        } */
     }
 }
