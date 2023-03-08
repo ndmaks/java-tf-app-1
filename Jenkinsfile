@@ -58,7 +58,7 @@ pipeline {
                 DOCKER_CREDS = credentials('docker-hub')
             } */
 
-            /* steps  */{
+            /* steps */ { 
                 /* script */ {
                    /* echo "waiting for EC2 server to initialize" 
                    sleep(time: 90, unit: "SECONDS") 
