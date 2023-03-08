@@ -53,13 +53,13 @@ pipeline {
                 }
             }
         }
-        stage('deploy') {
+        /* stage('deploy') */ {
             /* environment {
                 DOCKER_CREDS = credentials('docker-hub')
             } */
 
-            steps {
-                script {
+            /* steps  */{
+                /* script */ {
                    /* echo "waiting for EC2 server to initialize" 
                    sleep(time: 90, unit: "SECONDS") 
                    echo 'deploying docker image to EC2...'
