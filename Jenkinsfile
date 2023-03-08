@@ -32,9 +32,9 @@ pipeline {
             steps {
                 script {
                     echo "building the docker image"
-                     withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                     withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
                         sh 'docker build -t ${IMAGE_NAME} .'
-                        sh "echo $PASS | docker login -u $USER --password-stdin"
+                        sh "echo $PASSWORD | docker login -u $USER --password-stdin"
                         sh 'docker push ${IMAGE_NAME}'
                     }
                 }
@@ -47,16 +47,16 @@ pipeline {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',credentialsId: "AWS-ID",accessKeyVariable: 'AWS_ACCESS_KEY_ID',secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                             sh "terraform init"
                             sh "terraform apply --auto-approve"
-                            EC2_PUBLIC_IP = sh(script: "terraform output ec2_public_ip",returnStdout: true).trim() 
+                            EC2_PUBLIC_IP = sh(script: "terraform output ec2_public_ip",returnStdout: true).trim()
                         }
                     }
                 }
             }
         }
-         /* stage('deploy') {
+        stage('deploy') {
             environment {
                 DOCKER_CREDS = credentials('docker-hub')
-            } */
+            }
 
             steps {
                 script {
@@ -86,6 +86,6 @@ pipeline {
                    
                 }
             }
-        } 
+        }
     }
 }
