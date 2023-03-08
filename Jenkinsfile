@@ -40,7 +40,7 @@ pipeline {
                 }
             }
         }
-        stage('provision server') {
+        stage('delete server') {
            steps {
                 script {
                     dir('Terraform') {
